@@ -1,0 +1,415 @@
+/* ==========================================================================
+   custom.css - The Church of The Seattleites  |  Custom styles
+   Color palette:
+     Blue primary   : #4d9cc4
+     Light blue accent : #7ec3de
+     Light bg       : #f8fafc
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base / Reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: 4rem; /* account for fixed nav (h-16 = 4rem) */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #1f2937;
+  background-color: #ffffff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sticky footer: body is a flex column, main grows to fill space */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: #4d9cc4;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+@media (min-width: 768px) {
+  h1 { font-size: 3.25rem; }
+  h2 { font-size: 2.5rem; }
+  h3 { font-size: 1.75rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Hero section
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.70) 0%,
+    rgba(30, 41, 59, 0.50) 50%,
+    rgba(30, 41, 59, 0.80) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 48rem;
+  padding: 2rem 1.5rem;
+}
+
+.hero-content h1 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Hamburger menu animation
+   -------------------------------------------------------------------------- */
+.hamburger-bar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-open .hamburger-bar:nth-child(1) {
+  transform: translateY(0.5rem) rotate(45deg);
+}
+
+.menu-open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .hamburger-bar:nth-child(3) {
+  transform: translateY(-0.5rem) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox overlay
+   -------------------------------------------------------------------------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.25rem;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10;
+  transition: color 0.2s ease;
+}
+
+.lightbox-close:hover {
+  color: #7ec3de;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  z-index: 10;
+}
+
+.lightbox-nav:hover {
+  background: rgba(212, 168, 83, 0.35);
+  color: #7ec3de;
+}
+
+.lightbox-prev {
+  left: 1rem;
+}
+
+.lightbox-next {
+  right: 1rem;
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 0.25rem;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox-img--fading {
+  opacity: 0;
+}
+
+.lightbox-info {
+  margin-top: 0.75rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.lightbox-caption {
+  font-size: 0.95rem;
+  margin: 0 0 0.25rem;
+}
+
+.lightbox-counter {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Card hover effects
+   -------------------------------------------------------------------------- */
+.card {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Section spacing
+   -------------------------------------------------------------------------- */
+.section {
+  padding: 4rem 0;
+}
+
+.section-alt {
+  background-color: #f8fafc;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-heading h2 {
+  margin-bottom: 0.5rem;
+}
+
+.section-heading p {
+  color: #64748b;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Pink accent helpers
+   -------------------------------------------------------------------------- */
+.text-pink-accent {
+  color: #7ec3de;
+}
+
+.bg-pink-accent {
+  background-color: #7ec3de;
+}
+
+.border-pink-accent {
+  border-color: #7ec3de;
+}
+
+/* Primary button */
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: #7ec3de;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5dade2;
+  transform: translateY(-1px);
+}
+
+/* Secondary/outline button */
+.btn-secondary {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  border: 2px solid #ffffff;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #ffffff;
+  color: #4d9cc4;
+}
+
+/* --------------------------------------------------------------------------
+   Filter button active state
+   -------------------------------------------------------------------------- */
+.filter-btn-active {
+  background-color: #4d9cc4 !important;
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   Fade-in on scroll animation
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* For elements that should animate immediately (no JS observer needed) */
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Stagger delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* --------------------------------------------------------------------------
+   Responsive tweaks
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 80vh;
+  }
+
+  .section {
+    padding: 2.5rem 0;
+  }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-16 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white">Videos</h1>
+      <p id="page-subtitle" class="mt-3 text-lg text-gray-300">Watch sermons, hymns, and highlights from our community</p>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+      <div id="category-filters" class="flex flex-wrap justify-center gap-3">
+        <button id="filter-all" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-[#7ec3de] text-white" data-filter="all">All</button>
+        <button id="filter-sermons" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-[#4d9cc4] hover:bg-[#7ec3de] hover:text-white" data-filter="Sermons">Sermons</button>
+        <button id="filter-hymns" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-[#4d9cc4] hover:bg-[#7ec3de] hover:text-white" data-filter="Hymns">Hymns</button>
+        <button id="filter-conferences" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-[#4d9cc4] hover:bg-[#7ec3de] hover:text-white" data-filter="Conferences">Conferences</button>
+        <button id="filter-testimonies" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-[#4d9cc4] hover:bg-[#7ec3de] hover:text-white" data-filter="Testimonies">Testimonies</button>
+      </div>
+    </section>
+
+    <!-- Video Grid -->
+    <section class="max-w-7xl mx-auto px-4 pb-16">
+      <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Video items rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize } from './js/app.js';
+    import { videos as videosData } from './data/videos.js';
+    import { initFilter } from './js/filter.js';
+
+    document.getElementById('page-title').textContent = t('videos.title');
+    document.getElementById('page-subtitle').textContent = t('videos.subtitle');
+
+    document.getElementById('filter-all').textContent = t('videos.all');
+    document.getElementById('filter-sermons').textContent = t('videos.sermons');
+    document.getElementById('filter-hymns').textContent = t('videos.hymns');
+    document.getElementById('filter-conferences').textContent = t('videos.conferences');
+    document.getElementById('filter-testimonies').textContent = t('videos.testimonies');
+
+    const categoryLabels = {
+      'Sermons': t('videos.sermons'),
+      'Hymns': t('videos.hymns'),
+      'Conferences': t('videos.conferences'),
+      'Testimonies': t('videos.testimonies'),
+    };
+
+    // Render all videos as embed cards
+    const gridContainer = document.getElementById('videos-grid');
+
+    videosData.forEach(video => {
+      const card = document.createElement('div');
+      card.className = 'video-item bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300';
+      card.setAttribute('data-category', video.category);
+
+      const title = localize(video, 'title');
+      const categoryLabel = categoryLabels[video.category] || video.category;
+      card.innerHTML = `
+        <div class="aspect-video">
+          <iframe
+            src="https://www.youtube.com/embed/${video.youtubeId}"
+            title="${title}"
+            class="w-full h-full"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-bold text-[#4d9cc4] mb-2">${title}</h3>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500">${video.date}</span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-[#7ec3de]/20 text-[#7ec3de]">${categoryLabel}</span>
+          </div>
+        </div>
+      `;
+
+      gridContainer.appendChild(card);
+    });
+
+    // Initialize category filtering
+    initFilter('#videos-grid', '.video-item', '.filter-btn');
+  </script>
+</body>
+</html>

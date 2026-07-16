@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Church of The Seattleites</title>
+  <meta name="description" content="The Church of The Seattleites — A place of worship, community, and hope in the heart of the Pacific Northwest." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Smooth scrolling for anchor links */
+    html { scroll-behavior: smooth; }
+
+    /* Gallery hover overlay */
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* Hero parallax-like subtle animation */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; }
+    }
+    .hero-bg { animation: subtlePulse 8s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased">
+
+  <!-- ===== NAVIGATION (injected by app.js) ===== -->
+  <div id="nav-container"></div>
+
+  <main>
+
+    <!-- ===================================================================
+         SECTION 1: HERO BANNER
+         =================================================================== -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+      <!-- Background image (place your photo at images/hero.jpg) -->
+      <div class="absolute inset-0">
+        <img src="images/hero.jpg" alt="" class="w-full h-full object-cover" />
+        <!-- Fallback gradient if image hasn't loaded yet -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#4d9cc4] via-[#3d7a9a] to-[#1e3a4b] -z-10"></div>
+      </div>
+      <!-- Dark overlay for text readability -->
+      <div class="absolute inset-0 bg-black/50"></div>
+
+      <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-2 tracking-tight">
+          The Church of The Seattleites
+        </h1>
+        <p class="text-lg sm:text-xl text-white/70 mb-6">西雅图教会</p>
+        <p id="hero-verse" class="text-lg sm:text-xl text-gray-200 italic leading-relaxed mb-4">
+          &ldquo;So then you are no longer strangers and aliens, but you are fellow citizens with the saints and members of the household of God.&rdquo;
+        </p>
+        <p id="hero-verse-ref" class="text-sm text-[#7ec3de] font-medium mb-10 tracking-wide">
+          &mdash; Ephesians 2:19
+        </p>
+        <a id="hero-learn-more" href="#who-we-are"
+           class="inline-block border-2 border-[#7ec3de] text-[#7ec3de] hover:bg-[#7ec3de] hover:text-[#4d9cc4] px-8 py-3 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+          Learn More
+        </a>
+      </div>
+
+      <!-- Subtle scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 2: WHO WE ARE / WHAT WE BELIEVE
+         =================================================================== -->
+    <section id="who-we-are" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          <!-- Who We Are card -->
+          <div class="bg-white rounded-xl shadow-lg border-t-4 border-[#7ec3de] p-8 sm:p-10">
+            <h2 id="heading-who-we-are" class="text-3xl font-bold text-[#4d9cc4] mb-6">Who We Are</h2>
+            <p id="mission-text" class="text-gray-600 leading-relaxed text-base">
+              <!-- Populated by JS from siteData.mission -->
+            </p>
+            <p id="community-text" class="text-gray-600 leading-relaxed text-base mt-4">
+              <!-- Populated by JS from siteData.communityDescription -->
+            </p>
+          </div>
+
+          <!-- What We Believe card -->
+          <div class="bg-white rounded-xl shadow-lg border-t-4 border-[#7ec3de] p-8 sm:p-10">
+            <h2 id="heading-what-we-believe" class="text-3xl font-bold text-[#4d9cc4] mb-6">What We Believe</h2>
+            <ul id="beliefs-list" class="space-y-4">
+              <!-- Populated by JS from siteData.beliefs -->
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 3: ANNOUNCEMENTS & EVENTS
+         =================================================================== -->
+    <section id="announcements" class="py-20 bg-[#f8fafc]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 id="heading-announcements" class="text-3xl sm:text-4xl font-bold text-[#4d9cc4] mb-3">Announcements &amp; Events</h2>
+          <div class="w-16 h-1 bg-[#7ec3de] mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Announcements -->
+        <div id="announcements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Populated by JS: 3 announcement cards -->
+        </div>
+
+        <div class="text-center mt-8">
+          <a id="link-all-announcements" href="announcements.html"
+             class="inline-block text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm uppercase tracking-wider transition-colors border-b-2 border-[#7ec3de] hover:border-[#5dade2] pb-1">
+            View All Announcements &rarr;
+          </a>
+        </div>
+
+        <!-- Events -->
+        <div class="mt-16">
+          <h3 id="heading-events" class="text-2xl sm:text-3xl font-bold text-[#4d9cc4] mb-8 text-center">Upcoming Events</h3>
+          <div id="events-list" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Populated by JS: upcoming event cards -->
+          </div>
+
+          <div class="text-center mt-8">
+            <a id="link-all-events" href="events.html"
+               class="inline-block text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm uppercase tracking-wider transition-colors border-b-2 border-[#7ec3de] hover:border-[#5dade2] pb-1">
+              View All Events &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 5: PHOTO GALLERY PREVIEW
+         =================================================================== -->
+    <section id="gallery" class="py-20 bg-[#f8fafc]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 id="heading-gallery" class="text-3xl sm:text-4xl font-bold text-[#4d9cc4] mb-3">Gallery</h2>
+          <div class="w-16 h-1 bg-[#7ec3de] mx-auto rounded-full"></div>
+        </div>
+
+        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- Populated by JS: 6 gallery photos with hover overlay -->
+        </div>
+
+        <div class="text-center mt-10">
+          <a id="link-all-gallery" href="gallery.html"
+             class="inline-block text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm uppercase tracking-wider transition-colors border-b-2 border-[#7ec3de] hover:border-[#5dade2] pb-1">
+            View Full Gallery &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 6: LATEST VIDEO
+         =================================================================== -->
+    <section id="videos" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 id="heading-watch" class="text-3xl sm:text-4xl font-bold text-[#4d9cc4] mb-3">Watch</h2>
+          <div class="w-16 h-1 bg-[#7ec3de] mx-auto rounded-full"></div>
+        </div>
+
+        <div id="latest-video" class="max-w-4xl mx-auto">
+          <!-- Populated by JS: latest video embed + title/description -->
+        </div>
+
+        <div class="text-center mt-10">
+          <a id="link-all-videos" href="videos.html"
+             class="inline-block text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm uppercase tracking-wider transition-colors border-b-2 border-[#7ec3de] hover:border-[#5dade2] pb-1">
+            View All Videos &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION 7: CONTACT / VISIT US
+         =================================================================== -->
+    <section id="contact" class="py-20 bg-[#f8fafc]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 id="heading-visit" class="text-3xl sm:text-4xl font-bold text-[#4d9cc4] mb-3">Visit Us</h2>
+          <div class="w-16 h-1 bg-[#7ec3de] mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+          <!-- Contact Info -->
+          <div id="contact-info" class="space-y-8">
+            <!-- Populated by JS from siteData -->
+          </div>
+
+          <!-- Google Maps Embed -->
+          <div class="rounded-xl overflow-hidden shadow-lg h-80 lg:h-auto min-h-[320px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2690.5!2d-122.164!3d47.627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s14224+Bel-Red+Rd%2C+Bellevue%2C+WA+98007!5e0!3m2!1sen!2sus!4v1700000000000"
+              class="w-full h-full border-0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="The Church of The Seattleites location on Google Maps">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (injected by app.js) ===== -->
+  <div id="footer-container"></div>
+
+  <!-- ===================================================================
+       MODULE SCRIPT: Populate dynamic sections from data files
+       =================================================================== -->
+  <script type="module">
+    import { siteData } from './data/site.js';
+    import { posts } from './data/posts.js';
+    import { events } from './data/events.js';
+    import { gallery } from './data/gallery.js';
+    import { videos } from './data/videos.js';
+    import { formatDate, createYouTubeEmbed, truncateText, t, localize, getLang } from './js/app.js';
+
+    // i18n: Update static headings
+    document.addEventListener('DOMContentLoaded', () => {
+      // Hero
+      const heroVerse = document.getElementById('hero-verse');
+      if (heroVerse) heroVerse.innerHTML = t('home.heroVerse');
+      const heroVerseRef = document.getElementById('hero-verse-ref');
+      if (heroVerseRef) heroVerseRef.innerHTML = '\u2014 ' + (getLang() === 'zh' ? '以弗所书 2:19' : 'Ephesians 2:19');
+      const heroLearnMore = document.getElementById('hero-learn-more');
+      if (heroLearnMore) heroLearnMore.textContent = t('home.learnMore');
+
+      // Section headings
+      document.getElementById('heading-who-we-are')?.replaceChildren(document.createTextNode(t('home.whoWeAre')));
+      document.getElementById('heading-what-we-believe')?.replaceChildren(document.createTextNode(t('home.whatWeBelieve')));
+      document.getElementById('heading-announcements')?.replaceChildren(document.createTextNode(t('home.announcements')));
+      document.getElementById('link-all-announcements')?.replaceChildren(document.createTextNode(t('home.viewAllAnnouncements') + ' →'));
+      document.getElementById('heading-events')?.replaceChildren(document.createTextNode(t('home.upcomingEvents')));
+      document.getElementById('link-all-events')?.replaceChildren(document.createTextNode(t('home.viewAllEvents') + ' →'));
+      document.getElementById('heading-gallery')?.replaceChildren(document.createTextNode(t('home.galleryPreview')));
+      document.getElementById('link-all-gallery')?.replaceChildren(document.createTextNode(t('home.viewFullGallery') + ' →'));
+      document.getElementById('heading-watch')?.replaceChildren(document.createTextNode(t('home.latestVideo')));
+      document.getElementById('link-all-videos')?.replaceChildren(document.createTextNode(t('home.viewAllVideos') + ' →'));
+      document.getElementById('heading-visit')?.replaceChildren(document.createTextNode(t('home.visitUs')));
+    });
+
+    // -----------------------------------------------------------------
+    // SECTION 2: Who We Are / What We Believe
+    // -----------------------------------------------------------------
+    const missionEl = document.getElementById('mission-text');
+    if (missionEl) {
+      missionEl.textContent = localize(siteData, 'mission') || '';
+    }
+
+    const communityEl = document.getElementById('community-text');
+    if (communityEl) {
+      communityEl.textContent = localize(siteData, 'communityDescription') || '';
+    }
+
+    const beliefsList = document.getElementById('beliefs-list');
+    if (beliefsList && siteData.beliefs) {
+      beliefsList.innerHTML = siteData.beliefs
+        .map(
+          (belief) => `
+          <li class="flex items-start space-x-3">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-[#7ec3de]"></span>
+            <div>
+              <h3 class="font-semibold text-[#4d9cc4] text-sm">${localize(belief, 'title')}</h3>
+              <p class="text-gray-600 text-sm mt-1">${localize(belief, 'description')}</p>
+            </div>
+          </li>`
+        )
+        .join('');
+    }
+
+    // -----------------------------------------------------------------
+    // SECTION 3: Latest Announcements (first 3 posts)
+    // -----------------------------------------------------------------
+    const announcementsGrid = document.getElementById('announcements-grid');
+    if (announcementsGrid && posts.length > 0) {
+      const latestPosts = posts.slice(0, 3);
+      announcementsGrid.innerHTML = latestPosts
+        .map(
+          (post) => `
+          <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
+            <div class="h-48 overflow-hidden">
+              <img
+                src="${post.image}"
+                alt="${localize(post, 'title')}"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                loading="lazy" />
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-xs text-[#7ec3de] font-semibold uppercase tracking-wider mb-2">${formatDate(post.date)}</p>
+              <h3 class="text-lg font-bold text-[#4d9cc4] mb-2 leading-snug">${localize(post, 'title')}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed flex-1">${truncateText(localize(post, 'excerpt'), 140)}</p>
+              <a href="announcements.html#${post.slug || post.id}"
+                 class="mt-4 inline-block text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm transition-colors">
+                ${t('common.readMore')} &rarr;
+              </a>
+            </div>
+          </article>`
+        )
+        .join('');
+    }
+
+    // -----------------------------------------------------------------
+    // SECTION 4: Upcoming Events (filter type === 'upcoming')
+    // -----------------------------------------------------------------
+    const eventsList = document.getElementById('events-list');
+    if (eventsList && events.length > 0) {
+      const upcomingEvents = events.filter((e) => e.type === 'upcoming');
+      eventsList.innerHTML = upcomingEvents
+        .map(
+          (event) => `
+          <article class="bg-[#f8fafc] rounded-xl p-6 flex items-start space-x-5 hover:shadow-md transition-shadow duration-300 border border-gray-100">
+            <!-- Date badge -->
+            ${event.recurring
+              ? `<div class="flex-shrink-0 w-16 h-16 bg-[#4d9cc4] rounded-lg flex flex-col items-center justify-center text-white shadow px-1">
+                   <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                   <span class="text-[10px] font-bold uppercase leading-tight text-center">${t('common.weekly')}</span>
+                 </div>`
+              : `<div class="flex-shrink-0 w-16 h-16 bg-[#4d9cc4] rounded-lg flex flex-col items-center justify-center text-white shadow">
+                   <span class="text-xs font-medium uppercase text-[#7ec3de]">${getMonthAbbr(event.date)}</span>
+                   <span class="text-xl font-bold leading-none">${getDayNum(event.date)}</span>
+                 </div>`
+            }
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-bold text-[#4d9cc4] mb-1">${localize(event, 'title')}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mb-2">${truncateText(localize(event, 'description'), 160)}</p>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+                ${event.date ? `<span class="flex items-center space-x-1">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  <span>${localize(event, 'date')}</span>
+                </span>` : ''}
+                <span class="flex items-center space-x-1">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>${event.location}</span>
+                </span>
+              </div>
+            </div>
+          </article>`
+        )
+        .join('');
+    }
+
+    // Helper: extract month abbreviation from date string
+    function getMonthAbbr(dateStr) {
+      if (!dateStr) return '';
+      // Handle recurring text dates like "Every Sunday"
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) {
+        // For non-ISO dates, return a calendar icon placeholder
+        return 'ON';
+      }
+      return d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    }
+
+    // Helper: extract day number from date string
+    function getDayNum(dateStr) {
+      if (!dateStr) return '--';
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return '--';
+      return d.getDate();
+    }
+
+    // -----------------------------------------------------------------
+    // SECTION 5: Gallery Preview (flatten albums, show first 6 photos)
+    // -----------------------------------------------------------------
+    const galleryGrid = document.getElementById('gallery-grid');
+    if (galleryGrid && gallery.length > 0) {
+      const allPhotos = gallery.flatMap((album) =>
+        album.photos.map((photo) => ({ ...photo, albumName: album.album }))
+      );
+      const previewPhotos = allPhotos.slice(0, 6);
+      galleryGrid.innerHTML = previewPhotos
+        .map(
+          (photo) => `
+          <div class="gallery-item relative rounded-lg overflow-hidden shadow-md aspect-[4/3] cursor-pointer group">
+            <img
+              src="${photo.src}"
+              alt="${photo.caption || photo.alt || ''}"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              loading="lazy" />
+            <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity duration-300 flex items-end p-4">
+              <p class="text-white text-sm font-medium leading-snug">${photo.caption || ''}</p>
+            </div>
+          </div>`
+        )
+        .join('');
+    }
+
+    // -----------------------------------------------------------------
+    // SECTION 6: Latest Video (most recent by date)
+    // -----------------------------------------------------------------
+    const latestVideoEl = document.getElementById('latest-video');
+    if (latestVideoEl && videos.length > 0) {
+      // Sort by date descending, pick the first
+      const sorted = [...videos].sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      const latest = sorted[0];
+      latestVideoEl.innerHTML = `
+        ${createYouTubeEmbed(latest.youtubeId)}
+        <div class="mt-6 text-center">
+          <h3 class="text-xl font-bold text-[#4d9cc4] mb-2">${localize(latest, 'title')}</h3>
+          <p class="text-sm text-gray-500 mb-3">${formatDate(latest.date)}</p>
+          <p class="text-gray-600 text-base leading-relaxed max-w-2xl mx-auto">${localize(latest, 'description')}</p>
+        </div>`;
+    }
+
+    // -----------------------------------------------------------------
+    // SECTION 7: Contact / Visit Us
+    // -----------------------------------------------------------------
+    const contactInfo = document.getElementById('contact-info');
+    if (contactInfo) {
+      contactInfo.innerHTML = `
+        <!-- Address -->
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#4d9cc4] rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#4d9cc4] text-lg mb-1">${t('contact.address')}</h3>
+            <p class="text-gray-600">${siteData.address}</p>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#4d9cc4] rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#4d9cc4] text-lg mb-1">${t('contact.email')}</h3>
+            <a href="mailto:${siteData.email}" class="text-[#7ec3de] hover:text-[#5dade2] transition-colors">${siteData.email}</a>
+          </div>
+        </div>
+
+        <!-- Service Times -->
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#4d9cc4] rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#4d9cc4] text-lg mb-1">${t('contact.serviceTimes')}</h3>
+            <p class="text-gray-600">${t('contact.sunday')}: ${siteData.serviceTimes.sunday}</p>
+            <p class="text-gray-600">${t('contact.wednesday')}: ${siteData.serviceTimes.wednesday}</p>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-[#4d9cc4] rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#4d9cc4] text-lg mb-1">${t('contact.phone')}</h3>
+            <a href="tel:${siteData.phone.replace(/[^+\d]/g, '')}" class="text-[#7ec3de] hover:text-[#5dade2] transition-colors">${siteData.phone}</a>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

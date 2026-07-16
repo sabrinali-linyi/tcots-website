@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunday Service | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] text-white py-16 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold mb-4">Sunday Service</h1>
+      <p id="page-subtitle" class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+        Gathering together each week to worship, learn, and grow as a community of faith.
+      </p>
+    </section>
+
+    <!-- Service Info -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 border-t-4 border-[#7ec3de]">
+          <h2 id="heading-join-us" class="text-3xl font-bold text-[#4d9cc4] mb-8 text-center">Join Us This Sunday</h2>
+          <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div class="w-14 h-14 bg-[#7ec3de]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 id="heading-service-times" class="font-semibold text-[#4d9cc4] text-lg mb-2">Service Times</h3>
+              <p class="text-gray-600">Sunday Worship: 10:00 AM</p>
+              <p class="text-gray-600">Wednesday Bible Study: 7:00 PM</p>
+            </div>
+            <div>
+              <div class="w-14 h-14 bg-[#7ec3de]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <h3 id="heading-location" class="font-semibold text-[#4d9cc4] text-lg mb-2">Location</h3>
+              <p class="text-gray-600">123 Faith Avenue</p>
+              <p class="text-gray-600">Seattle, WA 98101</p>
+            </div>
+            <div>
+              <div class="w-14 h-14 bg-[#7ec3de]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-[#7ec3de]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 id="heading-what-to-expect" class="font-semibold text-[#4d9cc4] text-lg mb-2">What to Expect</h3>
+              <p class="text-gray-600">Welcoming atmosphere with contemporary worship, heartfelt prayer, and biblical teaching.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Sermon -->
+    <section class="py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 id="heading-latest-sermon" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Latest Sermon</h2>
+        <div class="w-16 h-1 bg-[#7ec3de] mx-auto mb-10"></div>
+        <div id="latest-sermon">
+          <p class="text-center text-gray-500">Loading latest sermon...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sermon Archive -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 id="heading-sermon-archive" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Sermon Archive</h2>
+        <div class="w-16 h-1 bg-[#7ec3de] mx-auto mb-10"></div>
+
+        <!-- Filter Controls -->
+        <div id="sermon-filters" class="flex flex-wrap justify-center gap-2 mb-10">
+          <button
+            class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-[#4d9cc4] text-white transition-colors"
+            data-filter="all">
+            All Sermons
+          </button>
+          <!-- Additional filter buttons rendered by JS -->
+        </div>
+
+        <div id="sermon-archive" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <p class="text-center text-gray-500 col-span-full">Loading sermons...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize, getLang } from './js/app.js';
+    import { sermons } from './data/sermons.js';
+
+    // ── Helpers ──────────────────────────────────────────────
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const lang = getLang();
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function extractYouTubeId(url) {
+      if (!url) return null;
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/);
+      return match ? match[1] : url; // If it's already just an ID, return as-is
+    }
+
+    function getMonthYear(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const lang = getLang();
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long' });
+    }
+
+    // ── Latest Sermon ────────────────────────────────────────
+    function renderLatestSermon() {
+      const container = document.getElementById('latest-sermon');
+      if (!sermons || sermons.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500">No sermons available yet.</p>';
+        return;
+      }
+
+      const sorted = [...sermons].sort((a, b) => new Date(b.date) - new Date(a.date));
+      const latest = sorted[0];
+      const videoId = extractYouTubeId(latest.youtubeUrl || latest.youtubeId);
+
+      container.innerHTML = `
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/${videoId}"
+              title="${localize(latest, 'title')}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-[#4d9cc4] mb-2">${localize(latest, 'title')}</h3>
+            <p class="text-[#7ec3de] font-medium mb-1">${latest.speaker || 'Pastor'}</p>
+            <p class="text-gray-500 text-sm">${formatDate(latest.date)}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Sermon Archive ───────────────────────────────────────
+    function renderSermonCard(sermon) {
+      const videoId = extractYouTubeId(sermon.youtubeUrl || sermon.youtubeId);
+      const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+      const outlineId = `outline-${videoId}-${sermon.date}`;
+
+      const hasOutline = sermon.outline && sermon.outline.length > 0;
+      const outlineHTML = hasOutline
+        ? `
+          <button
+            class="outline-toggle mt-3 flex items-center gap-1 text-sm font-medium text-[#7ec3de] hover:text-[#5dade2] transition-colors"
+            data-target="${outlineId}">
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+            ${t('sundayService.sermonOutline')}
+          </button>
+          <div id="${outlineId}" class="outline-content hidden mt-3 pl-4 border-l-2 border-[#7ec3de]/30 text-sm text-gray-600 space-y-1">
+            ${sermon.outline.split('\n').filter(line => line.trim()).map(item => `<p>${item}</p>`).join('')}
+          </div>
+        `
+        : '';
+
+      return `
+        <div class="sermon-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+             data-month="${getMonthYear(sermon.date)}">
+          <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer"
+             class="block relative group">
+            <img src="${thumbUrl}" alt="${localize(sermon, 'title')}" class="w-full h-44 object-cover" loading="lazy">
+            <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-14 h-14 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </a>
+          <div class="p-5">
+            <h3 class="font-bold text-[#4d9cc4] text-lg leading-tight mb-1">${localize(sermon, 'title')}</h3>
+            <p class="text-[#7ec3de] text-sm font-medium">${sermon.speaker || 'Pastor'}</p>
+            <p class="text-gray-400 text-xs mt-1">${formatDate(sermon.date)}</p>
+            ${outlineHTML}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderArchive(filteredSermons) {
+      const container = document.getElementById('sermon-archive');
+      const sorted = [...filteredSermons].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (sorted.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 col-span-full">No sermons found for this period.</p>';
+        return;
+      }
+
+      container.innerHTML = sorted.map(renderSermonCard).join('');
+      attachOutlineToggleListeners();
+    }
+
+    // ── Filter Buttons ───────────────────────────────────────
+    function buildFilters() {
+      const filtersContainer = document.getElementById('sermon-filters');
+
+      // Collect unique month/year combos
+      const months = [...new Set(sermons.map(s => getMonthYear(s.date)))];
+      // Sort newest first
+      months.sort((a, b) => new Date(b) - new Date(a));
+
+      const buttons = months.map(m =>
+        `<button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-[#4d9cc4] border border-gray-300 hover:bg-[#4d9cc4] hover:text-white transition-colors" data-filter="${m}">${m}</button>`
+      ).join('');
+
+      filtersContainer.innerHTML =
+        `<button class="filter-btn active px-4 py-2 rounded-full text-sm font-medium bg-[#4d9cc4] text-white transition-colors" data-filter="all">${t('sundayService.allSermons')}</button>`
+        + buttons;
+
+      // Attach click listeners
+      filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          filtersContainer.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active', 'bg-[#4d9cc4]', 'text-white');
+            b.classList.add('bg-white', 'text-[#4d9cc4]', 'border', 'border-gray-300');
+          });
+          btn.classList.add('active', 'bg-[#4d9cc4]', 'text-white');
+          btn.classList.remove('bg-white', 'text-[#4d9cc4]', 'border', 'border-gray-300');
+
+          const filter = btn.dataset.filter;
+          if (filter === 'all') {
+            renderArchive(sermons);
+          } else {
+            renderArchive(sermons.filter(s => getMonthYear(s.date) === filter));
+          }
+        });
+      });
+    }
+
+    // ── Outline Toggle ───────────────────────────────────────
+    function attachOutlineToggleListeners() {
+      document.querySelectorAll('.outline-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.dataset.target);
+          if (!target) return;
+          const isHidden = target.classList.contains('hidden');
+          target.classList.toggle('hidden');
+          const icon = btn.querySelector('svg');
+          if (icon) {
+            icon.style.transform = isHidden ? 'rotate(180deg)' : '';
+          }
+        });
+      });
+    }
+
+    // ── Init ─────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set translated headings
+      document.getElementById('page-title').textContent = t('sundayService.title');
+      document.getElementById('page-subtitle').textContent = t('sundayService.subtitle');
+      document.getElementById('heading-join-us').textContent = t('sundayService.serviceInfo');
+      document.getElementById('heading-service-times').textContent = t('sundayService.serviceTimes');
+      document.getElementById('heading-location').textContent = t('sundayService.location');
+      document.getElementById('heading-what-to-expect').textContent = t('sundayService.whatToExpect');
+      document.getElementById('heading-latest-sermon').textContent = t('sundayService.latestSermon');
+      document.getElementById('heading-sermon-archive').textContent = t('sundayService.sermonArchive');
+
+      renderLatestSermon();
+      buildFilters();
+      renderArchive(sermons);
+    });
+  </script>
+</body>
+</html>

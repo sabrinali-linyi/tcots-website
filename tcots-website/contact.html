@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-20 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white mb-4">Contact Us</h1>
+      <p id="page-subtitle" class="text-[#7ec3de] text-lg max-w-2xl mx-auto">
+        We would love to hear from you. Reach out anytime — our doors and hearts are always open.
+      </p>
+    </section>
+
+    <!-- Contact Info Cards -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- Address Card -->
+          <div class="bg-gray-50 rounded-lg shadow-md p-8 text-center border-t-4 border-[#7ec3de] hover:shadow-lg transition-shadow duration-300">
+            <div class="text-[#7ec3de] mb-4 flex justify-center">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <h3 id="heading-location" class="text-xl font-bold text-[#4d9cc4] mb-3">Our Location</h3>
+            <p id="contact-address" class="text-gray-600 leading-relaxed">
+              <!-- Populated by JS -->
+            </p>
+          </div>
+
+          <!-- Email Card -->
+          <div class="bg-gray-50 rounded-lg shadow-md p-8 text-center border-t-4 border-[#7ec3de] hover:shadow-lg transition-shadow duration-300">
+            <div class="text-[#7ec3de] mb-4 flex justify-center">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 id="heading-email" class="text-xl font-bold text-[#4d9cc4] mb-3">Email Us</h3>
+            <p id="contact-email" class="text-gray-600">
+              <!-- Populated by JS -->
+            </p>
+            <p id="contact-phone" class="text-gray-600 mt-2">
+              <!-- Populated by JS -->
+            </p>
+          </div>
+
+          <!-- Service Times Card -->
+          <div class="bg-gray-50 rounded-lg shadow-md p-8 text-center border-t-4 border-[#7ec3de] hover:shadow-lg transition-shadow duration-300">
+            <div class="text-[#7ec3de] mb-4 flex justify-center">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 id="heading-service-times" class="text-xl font-bold text-[#4d9cc4] mb-3">Service Times</h3>
+            <div id="contact-service-times" class="text-gray-600">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Maps Embed -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 id="heading-find-us" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Find Us</h2>
+        <div class="w-20 h-1 bg-[#7ec3de] mx-auto mb-10"></div>
+        <div class="rounded-lg overflow-hidden shadow-lg border-2 border-[#7ec3de]/20">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2690.5!2d-122.1645!3d47.6255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s14224+Bel-Red+Rd%2C+Bellevue%2C+WA+98007!5e0!3m2!1sen!2sus!4v1700000000000"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="The Church of The Seattleites location on Google Maps"
+            class="w-full">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Giving / Offerings -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 id="heading-giving" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Giving &amp; Offerings</h2>
+        <div class="w-20 h-1 bg-[#7ec3de] mx-auto mb-8"></div>
+        <p id="giving-description" class="text-center text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <!-- Populated by JS -->
+        </p>
+        <p id="giving-verse" class="text-center text-[#4d9cc4] italic mb-10">
+          "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." — 2 Corinthians 9:7
+        </p>
+        <div id="giving-methods" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+  <script type="module">
+    import { t, localize, getLang } from './js/app.js';
+    import { siteData } from './data/site.js';
+
+    // --- Contact Info Cards ---
+    const contactAddress = document.getElementById('contact-address');
+    if (contactAddress) {
+      contactAddress.textContent = siteData.address;
+    }
+
+    const contactEmail = document.getElementById('contact-email');
+    if (contactEmail) {
+      contactEmail.innerHTML = `<a href="mailto:${siteData.email}" class="text-[#7ec3de] hover:underline font-medium">${siteData.email}</a>`;
+    }
+
+    const contactPhone = document.getElementById('contact-phone');
+    if (contactPhone) {
+      contactPhone.innerHTML = `<a href="tel:${siteData.phone.replace(/[^+\d]/g, '')}" class="text-[#7ec3de] hover:underline font-medium">${siteData.phone}</a>`;
+    }
+
+    const contactServiceTimes = document.getElementById('contact-service-times');
+    if (contactServiceTimes && siteData.serviceTimes) {
+      contactServiceTimes.innerHTML = `
+        <p class="mb-1"><span class="font-semibold text-[#4d9cc4]">${t('contact.sunday')}:</span> ${siteData.serviceTimes.sunday}</p>
+        <p><span class="font-semibold text-[#4d9cc4]">${t('contact.wednesday')}:</span> ${siteData.serviceTimes.wednesday}</p>
+      `;
+    }
+
+    // --- Giving / Offerings ---
+    const givingDesc = document.getElementById('giving-description');
+    if (givingDesc && siteData.givingInfo) {
+      givingDesc.textContent = localize(siteData, 'givingInfo');
+    }
+
+    const givingMethodIcons = {
+      Zelle: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+      </svg>`,
+      'In-Person': `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+      </svg>`,
+      Mail: `<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+      </svg>`
+    };
+
+    const givingMethods = document.getElementById('giving-methods');
+    if (givingMethods && siteData.givingMethods) {
+      givingMethods.innerHTML = siteData.givingMethods.map(item => `
+        <div class="bg-gray-50 rounded-lg shadow-md p-6 text-center border-t-4 border-[#7ec3de] hover:shadow-lg transition-shadow duration-300">
+          <div class="text-[#7ec3de] mb-4 flex justify-center">
+            ${givingMethodIcons[item.method] || givingMethodIcons.Mail}
+          </div>
+          <h3 class="text-lg font-bold text-[#4d9cc4] mb-2">${localize(item, 'method')}</h3>
+          <p class="text-gray-600 text-sm">${localize(item, 'detail')}</p>
+        </div>
+      `).join('');
+    }
+
+    // --- i18n: Translate headings ---
+    document.getElementById('page-title').textContent = t('contact.title');
+    document.getElementById('page-subtitle').textContent = t('contact.subtitle');
+    document.getElementById('heading-location').textContent = t('contact.address');
+    document.getElementById('heading-email').textContent = t('contact.emailPhone');
+    document.getElementById('heading-service-times').textContent = t('contact.serviceTimes');
+    document.getElementById('heading-find-us').textContent = t('contact.findUs');
+    document.getElementById('heading-giving').innerHTML = t('contact.givingTitle');
+    document.getElementById('giving-verse').textContent = t('contact.givingVerse');
+  </script>
+</body>
+</html>

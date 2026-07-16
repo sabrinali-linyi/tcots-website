@@ -1,0 +1,104 @@
+export const siteData = {
+  name: "The Church of The Seattleites",
+  shortName: "TCOTS",
+  tagline: "Fellow citizens with the saints, and of the household of God",
+  tagline_zh: "与圣徒同国，是神家里的亲人",
+
+  address: "14224 Bel-Red Rd, Bellevue, WA 98007",
+  phone: "",
+  email: "churchoftheseattleites@gmail.com",
+  instagram: "https://www.instagram.com/thechurchoftheseattleites/",
+  instagramHandle: "@thechurchoftheseattleites",
+
+  serviceTimes: {
+    sunday: "10:00 AM",
+    wednesday: "7:00 PM"
+  },
+
+  copyright: {
+    startYear: 2020
+  },
+
+  mission:
+    "The Church of The Seattleites is a Christian community in the greater Seattle area. We gather together to worship the Lord, pursue the truth of the Bible, and grow in the divine life. Our desire is to experience and enjoy Christ in a mutually caring church life, and to share the riches of Christ with those around us. We welcome all believers and seekers to come and be part of God\u2019s household.",
+  mission_zh:
+    "西雅图教会是大西雅图地区的一个基督徒社区。我们聚集在一起敬拜主、追求圣经的真理、并在神圣的生命中成长。我们的渴望是在彼此关怀的教会生活中经历并享受基督，并与我们周围的人分享基督的丰富。我们欢迎所有信徒和寻求者前来，成为神家中的一员。",
+
+  missionStatement:
+    "The Church of The Seattleites exists to glorify God by making disciples of Jesus Christ through the faithful preaching of His Word, authentic worship, and loving community. We are a Christ-centered, Bible-believing congregation committed to sharing the Gospel and serving our neighbors in the greater Seattle area.",
+  missionStatement_zh:
+    "西雅图教会的存在是为了通过忠实传讲神的话语、真实的敬拜和充满爱的社区来造就耶稣基督的门徒，以此荣耀神。我们是一个以基督为中心、相信圣经的会众，致力于在大西雅图地区分享福音并服事我们的邻舍。",
+
+  beliefs: [
+    {
+      title: "The Bible as the Inspired Word of God",
+      title_zh: "圣经是神所默示的话语",
+      description:
+        "We believe the Bible is the complete divine revelation, inspired word by word by God through the Holy Spirit, and is the ultimate guide for faith and life.",
+      description_zh:
+        "我们相信圣经是完整的神圣启示，由神借着圣灵逐字默示而成，是信仰和生活的最终指引。",
+      icon: "book"
+    },
+    {
+      title: "The Trinity",
+      title_zh: "三一神",
+      description:
+        "We believe in one God who eternally exists in three persons: Father, Son, and Holy Spirit \u2014 coexisting equally from eternity to eternity.",
+      description_zh:
+        "我们相信独一的神永远存在于三个位格中：父、子、圣灵——从永远到永远同等共存。",
+      icon: "trinity"
+    },
+    {
+      title: "Salvation Through Jesus Christ",
+      title_zh: "借着耶稣基督的救恩",
+      description:
+        "We believe that salvation is by grace through faith in Jesus Christ alone, who died for our sins, was buried, and rose bodily on the third day.",
+      description_zh:
+        "我们相信救恩是唯独借着信靠耶稣基督、靠着恩典而得的。祂为我们的罪而死、被埋葬、并在第三天身体复活。",
+      icon: "cross"
+    },
+    {
+      title: "The Resurrection of Jesus",
+      title_zh: "耶稣的复活",
+      description:
+        "We believe in the bodily resurrection of Jesus Christ from the dead, confirming His deity and the hope of eternal life for all who believe.",
+      description_zh:
+        "我们相信耶稣基督从死里身体复活，这确证了祂的神性以及所有信徒永生的盼望。",
+      icon: "sunrise"
+    },
+    {
+      title: "The Church as the Body of Christ",
+      title_zh: "教会是基督的身体",
+      description:
+        "We believe the Church is the body of Christ, called to worship together, grow in faith, and carry the Gospel to every corner of the world.",
+      description_zh:
+        "我们相信教会是基督的身体，蒙召一同敬拜、在信心中成长、并将福音传到世界的每一个角落。",
+      icon: "church"
+    }
+  ],
+
+  communityDescription:
+    "At The Church of The Seattleites, you are more than a visitor \u2014 you are family. Whether you have walked with Christ for decades or are just beginning to explore faith, there is a place for you here. Our doors are open, our hearts are warm, and our community is ready to walk alongside you.",
+  communityDescription_zh:
+    "在西雅图教会，您不仅仅是一位访客——您是家人。无论您已经与基督同行数十年，还是刚刚开始探索信仰，这里都有属于您的位置。我们的大门敞开，我们的心温暖，我们的社区随时准备与您同行。",
+
+  givingInfo:
+    "Your generous giving supports the mission and ministry of The Church of The Seattleites. Tithes and offerings help us maintain our worship services, support our outreach programs, and spread the Gospel throughout our community. You may give via Zelle to our church email address (churchoftheseattleites@gmail.com).",
+  givingInfo_zh:
+    "您的慷慨奉献支持着西雅图教会的使命和事工。什一奉献和捐献帮助我们维持敬拜聚会、支持外展项目、并在我们的社区中传播福音。您可以通过Zelle转账至我们教会的电子邮件地址（churchoftheseattleites@gmail.com）来奉献。",
+
+  givingMethods: [
+    {
+      method: "Zelle",
+      method_zh: "Zelle转账",
+      detail: "Send to churchoftheseattleites@gmail.com",
+      detail_zh: "转账至 churchoftheseattleites@gmail.com"
+    },
+    {
+      method: "In-Person",
+      method_zh: "现场奉献",
+      detail: "Place your offering in the collection during Sunday worship",
+      detail_zh: "在主日敬拜时将您的奉献放入奉献箱中"
+    },
+  ]
+};

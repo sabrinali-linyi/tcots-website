@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Announcements | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-20 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white mb-4">Announcements</h1>
+      <p id="page-subtitle" class="text-gray-300 text-lg max-w-2xl mx-auto">
+        Stay up to date with the latest news and events from our church community
+      </p>
+    </section>
+
+    <!-- Posts Grid -->
+    <section class="py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Post cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize, getLang } from './js/app.js';
+    import { posts } from './data/posts.js';
+
+    // i18n: Update static headings
+    document.getElementById('page-title').textContent = t('announcements.title');
+    document.getElementById('page-subtitle').textContent = t('announcements.subtitle');
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const lang = getLang();
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    const grid = document.getElementById('posts-grid');
+
+    posts.forEach(post => {
+      const card = document.createElement('article');
+      card.className = 'card bg-white rounded-xl shadow-md overflow-hidden';
+      card.id = post.id;
+
+      card.innerHTML = `
+        <div class="p-6">
+          <p class="text-xs text-[#7ec3de] font-semibold uppercase tracking-wider mb-2">${formatDate(post.date)}</p>
+          <h2 class="text-xl font-bold text-[#4d9cc4] mb-3">${localize(post, 'title')}</h2>
+          <p class="text-gray-600 text-sm mb-4">${localize(post, 'excerpt')}</p>
+          <button class="post-toggle text-[#7ec3de] hover:text-[#5dade2] font-semibold text-sm transition-colors inline-flex items-center gap-1">
+            <span class="toggle-label">${t('common.readMore')}</span>
+            <svg class="toggle-icon w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div class="post-content hidden mt-4 pt-4 border-t border-gray-100 text-gray-700 text-sm leading-relaxed space-y-3">
+            ${localize(post, 'content')}
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    // Toggle expand/collapse
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.post-toggle');
+      if (!btn) return;
+      const card = btn.closest('.card');
+      const content = card.querySelector('.post-content');
+      const label = btn.querySelector('.toggle-label');
+      const icon = btn.querySelector('.toggle-icon');
+
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        label.textContent = t('common.readLess');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        label.textContent = t('common.readMore');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-16 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white">Photo Gallery</h1>
+      <p id="page-subtitle" class="mt-3 text-lg text-gray-300">Capturing moments of faith, fellowship, and community</p>
+    </section>
+
+    <!-- Album Filter -->
+    <section class="max-w-7xl mx-auto px-4 py-8">
+      <div id="album-filters" class="flex flex-wrap justify-center gap-3">
+        <!-- Filter buttons rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Photo Grid -->
+    <section class="max-w-7xl mx-auto px-4 pb-16">
+      <div id="gallery-grid" class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+        <!-- Gallery items rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize } from './js/app.js';
+    import { gallery as galleryData } from './data/gallery.js';
+    import { initLightbox } from './js/gallery-lightbox.js';
+    import { initFilter } from './js/filter.js';
+
+    document.getElementById('page-title').textContent = t('gallery.title');
+    document.getElementById('page-subtitle').textContent = t('gallery.subtitle');
+
+    // Flatten all albums into individual photos tagged with album name
+    const photos = galleryData.flatMap(album =>
+      album.photos.map(photo => ({
+        ...photo,
+        album: album.album
+      }))
+    );
+
+    // Build album filter buttons
+    const filtersContainer = document.getElementById('album-filters');
+    const albumNames = galleryData.map(album => album.album);
+
+    const allBtn = document.createElement('button');
+    allBtn.className = 'filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-[#7ec3de] text-white';
+    allBtn.setAttribute('data-filter', 'all');
+    allBtn.textContent = t('gallery.all');
+    filtersContainer.appendChild(allBtn);
+
+    galleryData.forEach(album => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-[#4d9cc4] hover:bg-[#7ec3de] hover:text-white';
+      btn.setAttribute('data-filter', album.album);
+      btn.textContent = localize(album, 'album');
+      filtersContainer.appendChild(btn);
+    });
+
+    // Render photo grid
+    const gridContainer = document.getElementById('gallery-grid');
+
+    photos.forEach(photo => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item break-inside-avoid relative group overflow-hidden rounded-lg cursor-pointer';
+      item.setAttribute('data-category', photo.album);
+
+      const caption = localize(photo, 'caption');
+      item.innerHTML = `
+        <div class="lightbox-trigger" data-src="${photo.src}" data-caption="${caption}">
+          <img
+            src="${photo.src}"
+            alt="${caption}"
+            class="w-full rounded-lg transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end rounded-lg">
+            <p class="text-white text-sm p-4 w-full">${caption}</p>
+          </div>
+        </div>
+      `;
+
+      gridContainer.appendChild(item);
+    });
+
+    // Initialize lightbox
+    initLightbox();
+
+    // Initialize album filtering
+    initFilter('#gallery-grid', '.gallery-item', '.filter-btn');
+  </script>
+</body>
+</html>

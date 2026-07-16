@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-20 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white mb-4">Resources</h1>
+      <p id="page-subtitle" class="text-gray-300 text-lg max-w-2xl mx-auto">
+        Equipping the saints for the work of ministry and the building up of the body of Christ
+      </p>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="max-w-7xl mx-auto px-4 py-10">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button id="filter-all" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-[#4d9cc4] text-white" data-filter="all">
+          All
+        </button>
+        <button id="filter-biblical-truths" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-[#4d9cc4] hover:text-white" data-filter="biblical-truths">
+          Biblical Truths
+        </button>
+        <button id="filter-hymns" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-[#4d9cc4] hover:text-white" data-filter="hymns">
+          Hymns
+        </button>
+        <button id="filter-conferences" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-[#4d9cc4] hover:text-white" data-filter="conferences">
+          Conferences
+        </button>
+        <button id="filter-study-materials" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 bg-gray-200 text-gray-700 hover:bg-[#4d9cc4] hover:text-white" data-filter="study-materials">
+          Study Materials
+        </button>
+      </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section class="max-w-7xl mx-auto px-4 pb-16">
+      <div id="resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Resource cards rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize } from './js/app.js';
+    import { resources } from './data/resources.js';
+    import { initFilter } from './js/filter.js';
+
+    document.getElementById('page-title').textContent = t('resources.title');
+    document.getElementById('page-subtitle').textContent = t('resources.subtitle');
+    document.getElementById('filter-all').textContent = t('resources.all');
+    document.getElementById('filter-biblical-truths').textContent = t('resources.biblicalTruths');
+    document.getElementById('filter-hymns').textContent = t('resources.hymns');
+    document.getElementById('filter-conferences').textContent = t('resources.conferences');
+    document.getElementById('filter-study-materials').textContent = t('resources.studyMaterials');
+
+    // Category display names and badge colors
+    const categoryMeta = {
+      'biblical-truths':  { label: t('resources.biblicalTruths'), badgeBg: 'bg-blue-100',   badgeText: 'text-blue-800' },
+      'hymns':            { label: t('resources.hymns'),            badgeBg: 'bg-cyan-100', badgeText: 'text-cyan-800' },
+      'conferences':      { label: t('resources.conferences'),      badgeBg: 'bg-amber-100',  badgeText: 'text-amber-800' },
+      'study-materials':  { label: t('resources.studyMaterials'),  badgeBg: 'bg-green-100',  badgeText: 'text-green-800' },
+    };
+
+    // SVG icons for resource types
+    const linkIcon = `
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>`;
+
+    const pdfIcon = `
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+      </svg>`;
+
+    const grid = document.getElementById('resources-grid');
+
+    resources.forEach((resource) => {
+      const meta = categoryMeta[resource.category] || { label: resource.category, badgeBg: 'bg-gray-100', badgeText: 'text-gray-800' };
+      const isLink = resource.type === 'link';
+      const typeIcon = isLink ? linkIcon : pdfIcon;
+      const actionLabel = isLink ? t('resources.visit') : t('resources.download');
+      const targetAttr = isLink ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+      const card = document.createElement('div');
+      card.className = 'resource-item card bg-white rounded-xl shadow-md overflow-hidden flex flex-col';
+      card.setAttribute('data-category', resource.category);
+
+      card.innerHTML = `
+        <div class="p-6 flex flex-col flex-1">
+          <!-- Category badge and type indicator -->
+          <div class="flex items-center justify-between mb-4">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${meta.badgeBg} ${meta.badgeText}">
+              ${meta.label}
+            </span>
+            <span class="text-gray-400" title="${isLink ? 'External Link' : 'PDF Document'}">
+              ${typeIcon}
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h3 class="text-lg font-bold text-[#4d9cc4] mb-2">${localize(resource, 'title')}</h3>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-sm leading-relaxed mb-6 flex-1">${localize(resource, 'description')}</p>
+
+          <!-- Action button -->
+          <a href="${resource.url}" ${targetAttr}
+             class="mt-auto inline-flex items-center justify-center space-x-2 w-full py-2.5 rounded-lg font-semibold text-sm transition-colors duration-200
+                    ${isLink
+                      ? 'bg-[#4d9cc4] text-white hover:bg-[#3d7a9a]'
+                      : 'bg-[#7ec3de] text-[#4d9cc4] hover:bg-[#c49843]'}">
+            ${typeIcon}
+            <span>${actionLabel}</span>
+          </a>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    // Initialize category filtering
+    initFilter('#resources-grid', '.resource-item', '.filter-btn');
+  </script>
+</body>
+</html>

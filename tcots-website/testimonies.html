@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonies | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] py-20 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold text-white mb-4">Testimonies</h1>
+      <p id="page-subtitle" class="text-gray-300 text-lg max-w-2xl mx-auto">
+        Hear how God has been working in the lives of our community
+      </p>
+    </section>
+
+    <!-- Testimonies Grid -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 id="heading-stories" class="text-3xl font-bold text-[#4d9cc4] mb-2">Stories of Grace</h2>
+          <div class="w-20 h-1 bg-[#7ec3de] mx-auto mb-4"></div>
+          <p id="stories-intro" class="text-gray-600 max-w-2xl mx-auto">
+            Every testimony is a witness to the faithfulness of God. These are real stories from real members of our church family.
+          </p>
+        </div>
+        <div id="testimonies-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Testimony cards rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 px-4 bg-white">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="bg-[#4d9cc4] rounded-2xl p-10 md:p-14 shadow-xl">
+          <svg class="w-12 h-12 text-[#7ec3de] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+          <h2 id="heading-share" class="text-3xl font-bold text-white mb-4">Share Your Testimony</h2>
+          <p id="share-desc" class="text-gray-300 mb-8 leading-relaxed">
+            Has God been working in your life? We would love to hear your story. Your testimony could be an encouragement to someone who needs it today.
+          </p>
+          <a href="mailto:churchoftheseattleites@gmail.com?subject=My%20Testimony"
+             class="btn-primary inline-flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span id="email-story-label">Email Your Story</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, getLang, localize } from './js/app.js';
+    import { testimonies } from './data/testimonies.js';
+
+    document.getElementById('page-title').textContent = t('testimonies.title');
+    document.getElementById('page-subtitle').textContent = t('testimonies.subtitle');
+    document.getElementById('heading-stories').textContent = getLang() === 'zh' ? '恩典的故事' : 'Stories of Grace';
+    document.getElementById('stories-intro').textContent = getLang() === 'zh' ? '每一个见证都是神信实的见证。这些是我们教会家人的真实故事。' : 'Every testimony is a witness to the faithfulness of God. These are real stories from real members of our church family.';
+    document.getElementById('heading-share').textContent = t('testimonies.shareTitle');
+    document.getElementById('share-desc').textContent = t('testimonies.shareDesc');
+    document.getElementById('email-story-label').textContent = t('testimonies.emailStory');
+
+    const grid = document.getElementById('testimonies-grid');
+
+    testimonies.forEach((testimony) => {
+      const card = document.createElement('div');
+      card.className = 'card bg-white rounded-xl shadow-md overflow-hidden flex flex-col';
+
+      card.innerHTML = `
+        <div class="p-6 flex flex-col flex-1">
+          <!-- Decorative quote icon -->
+          <div class="mb-4">
+            <svg class="w-10 h-10 text-[#7ec3de] opacity-40" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/>
+            </svg>
+          </div>
+
+          <!-- Photo and name -->
+          <div class="flex items-center space-x-4 mb-4">
+            <div class="w-20 h-20 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden border-2 border-[#7ec3de]/30 flex items-center justify-center">
+              <img src="${testimony.photo}"
+                   alt="${localize(testimony, 'name')}"
+                   class="w-full h-full object-cover"
+                   onerror="this.style.display='none'; this.parentElement.innerHTML='<svg class=\\'w-8 h-8 text-gray-400\\' fill=\\'none\\' stroke=\\'currentColor\\' viewBox=\\'0 0 24 24\\'><path stroke-linecap=\\'round\\' stroke-linejoin=\\'round\\' stroke-width=\\'2\\' d=\\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\\'/></svg>';">
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-[#4d9cc4]">${localize(testimony, 'name')}</h3>
+              <div class="w-8 h-0.5 bg-[#7ec3de] mt-1"></div>
+            </div>
+          </div>
+
+          <!-- Excerpt -->
+          <p class="text-gray-600 leading-relaxed text-sm mb-4 flex-1">"${localize(testimony, 'excerpt')}"</p>
+
+          <!-- Full story (hidden by default) -->
+          <div class="testimony-full hidden mt-2 mb-4 p-4 bg-gray-50 rounded-lg border-l-4 border-[#7ec3de] text-gray-700 leading-relaxed text-sm space-y-3">
+            ${localize(testimony, 'story')}
+          </div>
+
+          <!-- Read Full Story button -->
+          <button class="testimony-toggle mt-auto inline-flex items-center space-x-1 text-[#7ec3de] hover:text-[#c49843] font-semibold text-sm transition-colors duration-200 cursor-pointer">
+            <span class="toggle-label">${t('testimonies.readMore')}</span>
+            <svg class="toggle-icon w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    // Handle expand/collapse of full stories
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.testimony-toggle');
+      if (!btn) return;
+
+      const card = btn.closest('.card');
+      const fullStory = card.querySelector('.testimony-full');
+      const label = btn.querySelector('.toggle-label');
+      const icon = btn.querySelector('.toggle-icon');
+
+      if (fullStory.classList.contains('hidden')) {
+        fullStory.classList.remove('hidden');
+        label.textContent = t('testimonies.readLess');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        fullStory.classList.add('hidden');
+        label.textContent = t('testimonies.readMore');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  </script>
+</body>
+</html>

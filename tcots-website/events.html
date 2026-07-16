@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | The Church of The Seattleites</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <div id="nav-container"></div>
+  <main class="min-h-screen pt-20">
+
+    <!-- Page Header -->
+    <section class="bg-[#4d9cc4] text-white py-16 px-4 text-center">
+      <h1 id="page-title" class="text-4xl md:text-5xl font-bold mb-4">Events</h1>
+      <p id="page-subtitle" class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+        Connect, serve, and celebrate together. See what's coming up and what we've been doing.
+      </p>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 id="heading-upcoming" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Upcoming Events</h2>
+        <div class="w-16 h-1 bg-[#7ec3de] mx-auto mb-10"></div>
+        <div id="upcoming-events" class="space-y-6">
+          <p class="text-center text-gray-500">Loading events...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Events -->
+    <section class="py-16 px-4 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <h2 id="heading-past" class="text-3xl font-bold text-[#4d9cc4] mb-2 text-center">Past Events</h2>
+        <div class="w-16 h-1 bg-[#7ec3de] mx-auto mb-10"></div>
+        <div id="past-events">
+          <p class="text-center text-gray-500">Loading past events...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { t, localize, getLang } from './js/app.js';
+    import { events } from './data/events.js';
+
+    // ── Helpers ──────────────────────────────────────────────
+    function parseDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      return isNaN(d.getTime()) ? null : d;
+    }
+
+    function formatDate(dateStr) {
+      const d = parseDate(dateStr);
+      if (!d) return dateStr;
+      const lang = getLang();
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function getMonthDay(dateStr) {
+      const d = parseDate(dateStr);
+      if (!d) return null;
+      const lang = getLang();
+      const month = d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short' }).toUpperCase();
+      const day = d.getDate();
+      return { month, day };
+    }
+
+    function getMonthYear(dateStr) {
+      const d = parseDate(dateStr);
+      if (!d) return dateStr;
+      const lang = getLang();
+      return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'long' });
+    }
+
+    function isUpcoming(event) {
+      if (event.recurring) return true;
+      const d = parseDate(event.date);
+      if (!d) return event.type === 'upcoming'; // fall back to type field
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return d >= today;
+    }
+
+    // ── Upcoming Event Card ──────────────────────────────────
+    function renderUpcomingCard(event) {
+      const md = getMonthDay(event.date);
+
+      const dateBadgeHTML = md
+        ? `<div class="flex-shrink-0 w-24 bg-[#7ec3de] text-white flex flex-col items-center justify-center p-4">
+             <span class="text-sm font-bold uppercase tracking-wide">${md.month}</span>
+             <span class="text-3xl font-extrabold leading-none">${md.day}</span>
+           </div>`
+        : `<div class="flex-shrink-0 w-24 bg-[#7ec3de] text-white flex flex-col items-center justify-center p-4">
+             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+             </svg>
+             <span class="text-xs font-bold uppercase tracking-wide text-center leading-tight">${localize(event, 'date')}</span>
+           </div>`;
+
+      return `
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow flex overflow-hidden">
+          <!-- Date Badge -->
+          ${dateBadgeHTML}
+          <!-- Content -->
+          <div class="p-6 flex-1">
+            <h3 class="text-xl font-bold text-[#4d9cc4] mb-1">${localize(event, 'title')}</h3>
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500 mb-3">
+              ${event.time ? `
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  ${event.time}
+                </span>` : ''}
+              ${event.location ? `
+                <span class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  ${event.location}
+                </span>` : ''}
+            </div>
+            ${event.description ? `<p class="text-gray-600 text-sm leading-relaxed">${localize(event, 'description')}</p>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Past Event Card ──────────────────────────────────────
+    function renderPastCard(event) {
+      const imageHTML = event.image
+        ? `<img src="${event.image}" alt="${localize(event, 'title')}" class="w-full h-44 object-cover" loading="lazy">`
+        : `<div class="w-full h-44 bg-gradient-to-br from-[#4d9cc4] to-[#3d7a9a] flex items-center justify-center">
+             <svg class="w-12 h-12 text-[#7ec3de]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+             </svg>
+           </div>`;
+
+      return `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          ${imageHTML}
+          <div class="p-5">
+            <h3 class="font-bold text-[#4d9cc4] text-lg mb-1">${localize(event, 'title')}</h3>
+            <p class="text-[#7ec3de] text-sm font-medium mb-2">${formatDate(event.date)}</p>
+            ${event.description ? `<p class="text-gray-500 text-sm line-clamp-3">${localize(event, 'description')}</p>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    // ── Render Upcoming Events ───────────────────────────────
+    function renderUpcomingEvents() {
+      const container = document.getElementById('upcoming-events');
+      const upcoming = events
+        .filter(e => isUpcoming(e))
+        .sort((a, b) => {
+          // Recurring events go first, then sort by date
+          if (a.recurring && !b.recurring) return -1;
+          if (!a.recurring && b.recurring) return 1;
+          const da = parseDate(a.date), db = parseDate(b.date);
+          if (da && db) return da - db;
+          return 0;
+        });
+
+      if (upcoming.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12">
+            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <p class="text-gray-500 text-lg">${t('events.noUpcoming')}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = upcoming.map(renderUpcomingCard).join('');
+    }
+
+    // ── Render Past Events (grouped by month) ────────────────
+    function renderPastEvents() {
+      const container = document.getElementById('past-events');
+      const past = events
+        .filter(e => !isUpcoming(e))
+        .sort((a, b) => {
+          const da = parseDate(a.date), db = parseDate(b.date);
+          if (da && db) return db - da;
+          return 0;
+        });
+
+      if (past.length === 0) {
+        container.innerHTML = `<p class="text-center text-gray-500">${t('events.noPast')}</p>`;
+        return;
+      }
+
+      // Group by month/year
+      const grouped = {};
+      past.forEach(event => {
+        const key = getMonthYear(event.date);
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(event);
+      });
+
+      let html = '';
+      for (const [monthYear, monthEvents] of Object.entries(grouped)) {
+        html += `
+          <div class="mb-12">
+            <h3 class="text-xl font-bold text-[#4d9cc4] mb-6 border-b-2 border-[#7ec3de]/30 pb-2">${monthYear}</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${monthEvents.map(renderPastCard).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ── Init ─────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('page-title').textContent = t('events.title');
+      document.getElementById('page-subtitle').textContent = t('events.subtitle');
+      document.getElementById('heading-upcoming').textContent = t('events.upcoming');
+      document.getElementById('heading-past').textContent = t('events.past');
+
+      renderUpcomingEvents();
+      renderPastEvents();
+    });
+  </script>
+</body>
+</html>
