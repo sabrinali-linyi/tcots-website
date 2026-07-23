@@ -1,0 +1,69 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//The Church of The Seattleites//UW Fall 2026 Orientation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:gospel-preaching-on-campus-2026@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20261005
+SUMMARY:Gospel Preaching on Campus
+LOCATION:University of Washington campus
+DESCRIPTION:Fall quarter campus gospel outreach.
+END:VEVENT
+BEGIN:VEVENT
+UID:mid-dawg-days-welcome-2026@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:Mid-Dawg Days: New Students Welcoming
+LOCATION:University of Washington campus
+DESCRIPTION:A welcome event for new UW students.
+END:VEVENT
+BEGIN:VEVENT
+UID:sunday-worship-on-campus-20260927@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+SUMMARY:Sunday Worship on Campus
+LOCATION:University of Washington campus
+DESCRIPTION:Sunday worship and fellowship on campus.
+END:VEVENT
+BEGIN:VEVENT
+UID:student-activity-fair-2026@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261002
+SUMMARY:Student Activity Fair
+LOCATION:University of Washington campus
+DESCRIPTION:Meet Christians in Seattle at the UW Student Activity Fair.
+END:VEVENT
+BEGIN:VEVENT
+UID:first-day-welcome-2026@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:First Day of School: New Student Welcoming
+LOCATION:University of Washington campus
+DESCRIPTION:Welcome and connect with students on the first day of fall quarter.
+END:VEVENT
+BEGIN:VEVENT
+UID:new-student-kickoff-2026@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20261002
+DTEND;VALUE=DATE:20261003
+SUMMARY:First Friday of New Quarter: New Student Kickoff
+LOCATION:University of Washington campus
+DESCRIPTION:A fall quarter kickoff for new students and friends.
+END:VEVENT
+BEGIN:VEVENT
+UID:sunday-worship-on-campus-20261004@tcots
+DTSTAMP:20260723T000000Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:Sunday Worship on Campus
+LOCATION:University of Washington campus
+DESCRIPTION:Sunday worship and fellowship on campus.
+END:VEVENT
+END:VCALENDAR
