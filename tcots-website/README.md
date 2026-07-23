@@ -29,6 +29,7 @@ tcots-website/
 │   ├── site.js             # Site settings, contact info, beliefs
 │   ├── posts.js            # Announcements
 │   ├── events.js           # Events (upcoming + past)
+│   ├── orientation-schedule.js # UW Fall orientation schedule
 │   ├── sermons.js          # Sunday service sermons
 │   ├── gallery.js          # Photo albums
 │   ├── videos.js           # YouTube videos
@@ -63,10 +64,12 @@ This file controls information that appears across multiple pages (nav, footer, 
 | `email` | Contact page, footer |
 | `phone` | Contact page (leave `""` to hide) |
 | `instagram` / `instagramHandle` | Footer |
+| `studentGroup` | UW student group link and homepage callout |
 | `serviceTimes.sunday` | About page, contact page |
 | `serviceTimes.wednesday` | About page, contact page |
 | `mission` | Homepage "Who We Are", about page |
 | `missionStatement` | About page |
+| `churchDefinition` | About page "The Church" statement |
 | `beliefs` | Homepage, about page "What We Believe" |
 | `communityDescription` | Homepage, about page |
 | `givingInfo` | Contact page giving section |
@@ -163,6 +166,16 @@ Shown on the homepage (upcoming only) and the events page (upcoming + past).
 ```
 
 **Important:** When an event passes, change its `type` from `"upcoming"` to `"past"` so it moves to the past events section.
+
+---
+
+### UW Fall Orientation Schedule
+
+**Files:** `data/orientation-schedule.js` and `calendar/fall-2026-orientation.ics`
+
+The schedule appears on the homepage and Events page. Edit the JavaScript data file to change what visitors see. Update the matching `.ics` calendar file at the same time so calendar downloads stay accurate. Dates use `YYYY-MM-DD`; a multi-day event also has an `endDate`.
+
+The `christiansinseattle.org` link is stored once in `data/site.js` under `studentGroup.url` and appears in the navigation, homepage, and footer.
 
 ---
 
