@@ -24,7 +24,7 @@ export const events = [
     description_zh:
       "\u4e00\u573a\u5411\u6240\u6709\u4eba\u5f00\u653e\u7684\u7279\u522b\u798f\u97f3\u805a\u4f1a\u3002\u6b22\u8fce\u6765\u542c\u8036\u7a23\u57fa\u7763\u7684\u597d\u6d88\u606f\uff0c\u4e0e\u5723\u5f92\u4eec\u4e00\u540c\u4ea4\u901a\u5e76\u4eab\u53d7\u7231\u7b75\u3002\u8bf7\u9080\u8bf7\u60a8\u7684\u670b\u53cb\u3001\u90bb\u5c45\u548c\u5bb6\u4eba\uff01",
     location: "14224 Bel-Red Rd, Bellevue, WA 98007",
-    type: "upcoming",
+    type: "past",
     image: "images/events/spring-gospel-2026.jpg",
   },
   {

@@ -10,6 +10,7 @@ export const strings = {
   "nav.testimonies": { en: "Testimonies", zh: "\u89c1\u8bc1" },
   "nav.resources": { en: "Resources", zh: "\u8d44\u6e90" },
   "nav.contact": { en: "Contact", zh: "\u8054\u7cfb\u6211\u4eec" },
+  "nav.uwStudents": { en: "UW Student Group", zh: "UW \u5b66\u751f\u793e\u56e2" },
 
   // Footer
   "footer.quickLinks": { en: "Quick Links", zh: "\u5feb\u901f\u94fe\u63a5" },
@@ -35,6 +36,14 @@ export const strings = {
   "home.latestVideo": { en: "Latest Video", zh: "\u6700\u65b0\u89c6\u9891" },
   "home.viewAllVideos": { en: "View All Videos", zh: "\u67e5\u770b\u6240\u6709\u89c6\u9891" },
   "home.visitUs": { en: "Visit Us", zh: "\u8bbf\u95ee\u6211\u4eec" },
+  "home.uwStudentsTitle": { en: "Campus Fellowship at UW", zh: "UW \u6821\u56ed\u4ea4\u901a" },
+  "home.visitStudentGroup": { en: "Visit Christians in Seattle", zh: "\u8bbf\u95ee Christians in Seattle" },
+  "home.orientationSchedule": { en: "UW Fall Quarter Orientation Events", zh: "UW \u79cb\u5b63\u5b66\u671f\u8fce\u65b0\u6d3b\u52a8" },
+  "home.orientationDates": { en: "September 24 - October 4, 2026", zh: "2026 \u5e74 9 \u6708 24 \u65e5 - 10 \u6708 4 \u65e5" },
+  "home.addAllCalendar": { en: "Add all to calendar", zh: "\u5168\u90e8\u6dfb\u52a0\u5230\u65e5\u5386" },
+  "home.orientationTeaserLabel": { en: "UW Fall 2026", zh: "UW 2026 \u79cb\u5b63" },
+  "home.orientationTeaserTitle": { en: "Orientation events through October 4", zh: "\u8fce\u65b0\u6d3b\u52a8\u6301\u7eed\u81f3 10 \u6708 4 \u65e5" },
+  "home.orientationViewSchedule": { en: "View full schedule", zh: "\u67e5\u770b\u5b8c\u6574\u65e5\u7a0b" },
 
   // About page
   "about.title": { en: "About Us", zh: "\u5173\u4e8e\u6211\u4eec" },
