@@ -14,6 +14,7 @@ const navItems = [
   { labelKey: 'nav.videos', href: 'videos.html' },
   { labelKey: 'nav.resources', href: 'resources.html' },
   { labelKey: 'nav.contact', href: 'contact.html' },
+  { labelKey: 'nav.uwStudents', href: siteData.studentGroup.url, external: true },
 ];
 
 // ---------------------------------------------------------------------------
@@ -37,7 +38,7 @@ export function renderNav() {
 
   const navLinksHTML = navItems
     .map((item) => {
-      const isActive = currentPage === item.href;
+      const isActive = !item.external && currentPage === item.href;
       return `
         <a href="${item.href}"
            class="nav-link block lg:inline-block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200
@@ -45,8 +46,9 @@ export function renderNav() {
                     ? 'bg-white/15 text-blue-200'
                     : 'text-gray-200 hover:bg-white/10 hover:text-white'
                   }"
-           ${isActive ? 'aria-current="page"' : ''}>
-          ${t(item.labelKey)}
+           ${isActive ? 'aria-current="page"' : ''}
+           ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+          ${t(item.labelKey)}${item.external ? ' <span aria-hidden="true">&#8599;</span>' : ''}
         </a>`;
     })
     .join('');
@@ -137,8 +139,8 @@ export function renderFooter() {
   const yearDisplay = startYear < currentYear ? `${startYear}\u2013${currentYear}` : `${currentYear}`;
 
   const quickLinks = navItems
-    .filter((_, i) => i < 6) // First six links for quick nav
-    .map((item) => `<a href="${item.href}" class="text-gray-400 hover:text-[#7ec3de] transition-colors text-sm">${t(item.labelKey)}</a>`)
+    .filter((item, i) => i < 5 || item.external)
+    .map((item) => `<a href="${item.href}" ${item.external ? 'target="_blank" rel="noopener noreferrer"' : ''} class="text-gray-400 hover:text-[#7ec3de] transition-colors text-sm">${t(item.labelKey)}${item.external ? ' &#8599;' : ''}</a>`)
     .join('');
 
   container.innerHTML = `
